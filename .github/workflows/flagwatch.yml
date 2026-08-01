@@ -1,0 +1,58 @@
+name: flagwatch
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: flagwatch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Collect flag changes
+        env:
+          REPORT_BASE_URL: ${{ github.server_url }}/${{ github.repository }}/blob/main
+        run: python3 flagwatch.py
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if [ -n "$(git status --porcelain reports state)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "notify=$(cat last_run.notify)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "flags: $(cat last_run.title)"
+          git push
+
+      - name: Notify
+        if: steps.diff.outputs.notify == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "$(cat last_run.title)" \
+            --body-file last_run.md \
+            --assignee "${{ github.repository_owner }}"
+
+      - name: Job summary
+        if: always()
+        run: cat last_run.md >> "$GITHUB_STEP_SUMMARY" || true
