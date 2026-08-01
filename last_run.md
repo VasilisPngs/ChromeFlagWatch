@@ -1,6 +1,6 @@
 ## Windows M151 — 151.0.7922.72
 
-Added 49 — Removed 36 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/windows/M151.md)
+Added 49 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/windows/M151.md)
 
 New since last run (49):
 
@@ -54,48 +54,9 @@ New since last run (49):
 - `#user-media-element-legacy`
 - `#writer-api`
 
-Newly removed (36):
-
-- `#ai-mode-omnibox-entry-point`
-- `#audio-ducking`
-- `#auto-picture-in-picture-for-video-playback`
-- `#autofill-enable-card-info-runtime-retrieval`
-- `#autofill-enable-support-for-name-and-email-profile`
-- `#autofill-more-prominent-popup`
-- `#autofill-vcn-enroll-strike-expiry-time`
-- `#cast-streaming-media-video-encoder`
-- `#classifier-api-for-tiny-model`
-- `#customize-tab-group-color-palette`
-- `#data-controls-drag-enforcement`
-- `#enable-experimental-accessibility-language-detection`
-- `#enable-extensions-menu-teardown-fix`
-- `#enable-hardware-secure-decryption-experiment`
-- `#extension-manifest-v2-deprecation-unsupported`
-- `#glic-button-auto-summarize`
-- `#glic-detached`
-- `#glic-mi-tab-context-menu`
-- `#horizontal-tab-strip-combo-button`
-- `#launch-queue-stop-sending-on-reload`
-- `#permissions-ai-p92`
-- `#picture-in-picture-show-window-animation`
-- `#privacy-sandbox-internals`
-- `#prompt-api-for-gemini-nano`
-- `#prompt-api-for-gemini-nano-multimodal-input`
-- `#rcaps-dynamic-profile-country`
-- `#read-anything-images-via-algorithm`
-- `#read-anything-immersive-reading-mode`
-- `#rewriter-api-for-gemini-nano`
-- `#save-passwords-contextual-ui`
-- `#summarizer-api-for-gemini-nano`
-- `#ui-automation-provider`
-- `#webrtc-allow-wgc-screen-capturer`
-- `#webui-omnibox-full-popup-v2`
-- `#windows11-mica-titlebar`
-- `#writer-api-for-gemini-nano`
-
 ## Android M151 — 151.0.7922.71
 
-Added 36 — Removed 32 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/android/M151.md)
+Added 36 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/android/M151.md)
 
 New since last run (36):
 
@@ -136,44 +97,9 @@ New since last run (36):
 - `#user-media-element-legacy`
 - `#wide-screen-feed-for-foldables`
 
-Newly removed (32):
-
-- `#android-bookmark-bar`
-- `#android-caret-browsing`
-- `#autofill-enable-card-info-runtime-retrieval`
-- `#autofill-enable-support-for-name-and-email-profile`
-- `#autofill-vcn-enroll-strike-expiry-time`
-- `#browser-window-interface-mobile`
-- `#cct-auth-tab`
-- `#chrome-native-url-overriding`
-- `#data-controls-drag-enforcement`
-- `#debug-chime-notification`
-- `#enable-android-omnibox-autofocus-on-incognito-ntp`
-- `#enable-android-reporting-omnibox-autofocus-header`
-- `#enable-experimental-accessibility-language-detection`
-- `#enable-extensions-menu-teardown-fix`
-- `#enable-proxy-authentication-service`
-- `#enable-task-manager-clank`
-- `#fallback-to-sw-if-gles3-not-supported`
-- `#in-flow-trusted-vault-key-retrieval-android`
-- `#launch-queue-stop-sending-on-reload`
-- `#media-indicators-android`
-- `#mojo-use-eventfd`
-- `#ntp-simplification`
-- `#omnibox-improvement-for-lff`
-- `#permissions-ai-p92`
-- `#privacy-sandbox-internals`
-- `#rcaps-dynamic-profile-country`
-- `#reader-mode-distill-in-app`
-- `#reader-mode-improvements`
-- `#search-in-settings`
-- `#settings-multi-column`
-- `#settings-single-activity`
-- `#toolbar-stale-capture-bug-fix`
-
 ## iOS M151 — 151.0.7922.57
 
-Added 26 — Removed 17 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/ios/M151.md)
+Added 26 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/ios/M151.md)
 
 New since last run (26):
 
@@ -203,23 +129,3 @@ New since last run (26):
 - `#start-surface-user-setting`
 - `#support-google-one-deep-link`
 - `#zero-state-suggestions-wcgd`
-
-Newly removed (17):
-
-- `#aim-cobrowse-debug-entrypoint`
-- `#ask-gemini-chip`
-- `#autofill-enable-card-info-runtime-retrieval`
-- `#autofill-enable-support-for-name-and-email-profile`
-- `#autofill-vcn-enroll-strike-expiry-time`
-- `#gemini-copresence`
-- `#gemini-dynamic-settings`
-- `#gemini-floaty-all-pages`
-- `#gemini-maps-rich-ui`
-- `#in-flow-trusted-vault-key-retrieval-ios`
-- `#ios-bottom-sheet-migration`
-- `#ios-keyboard-accessory-two-bubble`
-- `#most-visited-tiles-customization-ios`
-- `#rcaps-dynamic-profile-country`
-- `#show-tab-group-in-grid-on-start`
-- `#tab-grid-new-transitions`
-- `#tab-group-color-on-surface`
