@@ -298,7 +298,6 @@ def main():
     body, title = notification(notify, base_url)
     (ROOT / "last_run.md").write_text(body, encoding="utf-8")
     (ROOT / "last_run.title").write_text(title or "no flag changes", encoding="utf-8")
-    (ROOT / "last_run.notify").write_text("true" if notify else "false", encoding="utf-8")
     print(title or "no flag changes")
     return 0
 
