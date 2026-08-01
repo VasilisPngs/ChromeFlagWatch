@@ -183,30 +183,41 @@ def describe(name, entry, data, milestone):
     )
 
 
-def render(platform, version, milestone, baseline, baseline_milestone, new, old, added, removed):
+def render(platform, version, milestone, baseline, baseline_milestone, new, selected, added):
     lines = [
         f"# Chrome {platform['label']} Stable M{milestone} — {version}",
         "",
         f"Baseline M{baseline_milestone} — {baseline}",
         "",
-        f"Added **{len(added)}** — Removed **{len(removed)}** — "
-        f"Total **{len(select(new, platform['tokens']))}**",
+        f"Added **{len(added)}** — Total **{len(selected)}**",
         "",
     ]
     if added:
         lines.append(f"## Added ({len(added)})")
         lines.append("")
-        selected = select(new, platform["tokens"])
         for name in added:
             lines.append(describe(name, selected[name], new, milestone))
-    if removed:
-        lines.append(f"## Removed ({len(removed)})")
-        lines.append("")
-        previous = select(old, platform["tokens"])
-        for name in removed:
-            lines.append(f"- `#{name}` — {' '.join(previous[name]['os'])}")
-        lines.append("")
     return "\n".join(lines)
+
+
+def notification(notify, base_url):
+    lines = []
+    for item in notify:
+        link = f"{base_url}/{item['report']}" if base_url else item["report"]
+        lines.append(f"## {item['platform']} M{item['milestone']} — {item['version']}")
+        lines.append("")
+        lines.append(f"Added {len(item['added'])} — [full report]({link})")
+        lines.append("")
+        lines.append(f"New since last run ({len(item['fresh'])}):")
+        lines.append("")
+        for name in item["fresh"]:
+            lines.append(f"- `#{name}`")
+        lines.append("")
+    title = " / ".join(
+        f"{item['platform']} M{item['milestone']} +{len(item['fresh'])}"
+        for item in notify
+    )
+    return "\n".join(lines), title
 
 
 def main():
@@ -240,10 +251,9 @@ def main():
 
         new = snapshot(version, platform["source"], cache)
         old = snapshot(baseline, platform["source"], cache)
-        new_names = set(select(new, platform["tokens"]))
+        selected = select(new, platform["tokens"])
         old_names = set(select(old, platform["tokens"]))
-        added = sorted(new_names - old_names)
-        removed = sorted(old_names - new_names)
+        added = sorted(set(selected) - old_names)
 
         report_path = f"reports/{key}/M{milestone}.md"
         destination = ROOT / report_path
@@ -251,7 +261,7 @@ def main():
         destination.write_text(
             render(
                 platform, version, milestone, baseline, baseline_milestone,
-                new, old, added, removed,
+                new, selected, added,
             ),
             encoding="utf-8",
         )
@@ -262,7 +272,6 @@ def main():
                     "milestone": milestone,
                     "baseline": baseline,
                     "added": added,
-                    "removed": removed,
                 },
                 indent=2,
             ),
@@ -270,7 +279,6 @@ def main():
         )
 
         fresh = sorted(set(added) - set(previous.get("added", [])))
-        gone = sorted(set(removed) - set(previous.get("removed", [])))
         summary.append(
             {
                 "platform": platform["label"],
@@ -278,10 +286,8 @@ def main():
                 "version": version,
                 "milestone": milestone,
                 "added": added,
-                "removed": removed,
                 "fresh": fresh,
-                "gone": gone,
-                "notify": bool(fresh or gone),
+                "notify": bool(fresh),
                 "report": report_path,
             }
         )
@@ -289,35 +295,8 @@ def main():
     (ROOT / "last_run.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     notify = [item for item in summary if item["notify"]]
-    lines = []
-    for item in notify:
-        link = f"{base_url}/{item['report']}" if base_url else item["report"]
-        lines.append(f"## {item['platform']} M{item['milestone']} — {item['version']}")
-        lines.append("")
-        lines.append(
-            f"Added {len(item['added'])} — Removed {len(item['removed'])} — "
-            f"[full report]({link})"
-        )
-        lines.append("")
-        if item["fresh"]:
-            lines.append(f"New since last run ({len(item['fresh'])}):")
-            lines.append("")
-            for name in item["fresh"]:
-                lines.append(f"- `#{name}`")
-            lines.append("")
-        if item["gone"]:
-            lines.append(f"Newly removed ({len(item['gone'])}):")
-            lines.append("")
-            for name in item["gone"]:
-                lines.append(f"- `#{name}`")
-            lines.append("")
-
-    title = " / ".join(
-        f"{item['platform']} M{item['milestone']} +{len(item['fresh'])}"
-        f"{'' if not item['gone'] else ' -' + str(len(item['gone']))}"
-        for item in notify
-    )
-    (ROOT / "last_run.md").write_text("\n".join(lines), encoding="utf-8")
+    body, title = notification(notify, base_url)
+    (ROOT / "last_run.md").write_text(body, encoding="utf-8")
     (ROOT / "last_run.title").write_text(title or "no flag changes", encoding="utf-8")
     (ROOT / "last_run.notify").write_text("true" if notify else "false", encoding="utf-8")
     print(title or "no flag changes")

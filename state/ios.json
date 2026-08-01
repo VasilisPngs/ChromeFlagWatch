@@ -29,24 +29,5 @@
     "start-surface-user-setting",
     "support-google-one-deep-link",
     "zero-state-suggestions-wcgd"
-  ],
-  "removed": [
-    "aim-cobrowse-debug-entrypoint",
-    "ask-gemini-chip",
-    "autofill-enable-card-info-runtime-retrieval",
-    "autofill-enable-support-for-name-and-email-profile",
-    "autofill-vcn-enroll-strike-expiry-time",
-    "gemini-copresence",
-    "gemini-dynamic-settings",
-    "gemini-floaty-all-pages",
-    "gemini-maps-rich-ui",
-    "in-flow-trusted-vault-key-retrieval-ios",
-    "ios-bottom-sheet-migration",
-    "ios-keyboard-accessory-two-bubble",
-    "most-visited-tiles-customization-ios",
-    "rcaps-dynamic-profile-country",
-    "show-tab-group-in-grid-on-start",
-    "tab-grid-new-transitions",
-    "tab-group-color-on-surface"
   ]
 }
