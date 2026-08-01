@@ -1,0 +1,225 @@
+## Windows M151 — 151.0.7922.72
+
+Added 49 — Removed 36 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/windows/M151.md)
+
+New since last run (49):
+
+- `#antivirus-telemetry-for-downloads`
+- `#api-contextual-tasks-private`
+- `#autofill-ambient-autofill`
+- `#autofill-enable-ai-card-recommendation`
+- `#autofill-enable-resurrecting-payments-users`
+- `#cast-streaming-hardware-av1`
+- `#cast-streaming-max-video-bitrate`
+- `#chrome-dark-neutrals-26`
+- `#classifier-api`
+- `#collapse-tab-group-during-drag`
+- `#collect-accessibility-heuristic-in-canvas-ukm`
+- `#context-containers`
+- `#cross-device-signin-from-desktop`
+- `#declarative-performance-observer`
+- `#device-signals-backfill-disclaimer`
+- `#devtools-plus-button`
+- `#dictation`
+- `#enable-cookie-binding-cookie-upgrade`
+- `#enable-cross-device-theme-tracker`
+- `#enable-http-headers-injection`
+- `#enable-oauth-multilogin-youtube-cookies-binding`
+- `#enable-realbox-virtual-focus`
+- `#glic-actor-autofill-pre-click`
+- `#glic-experimental-triggering-screenshot`
+- `#glic-hotkey-local-scope`
+- `#infobar-inline-links`
+- `#mobile-promo-on-desktop-with-qr-code-wave-2`
+- `#mobile-promo-on-desktop-with-reminder-wave-2`
+- `#ntp-realbox-dynamic-ai-mode-button`
+- `#omnibox-dynamic-ai-mode-button`
+- `#omnibox-loom`
+- `#on-device-model-speculative-decoding`
+- `#partition-alloc-scheduler-loop-quarantine`
+- `#password-save-in-context-error-resolution`
+- `#password-save-update-dropdown-menu-experiment`
+- `#populate-dom-node-id-in-focused-node-details`
+- `#prefetch-activation-beacon`
+- `#prerender-activation-beacon`
+- `#prompt-api`
+- `#prompt-api-multimodal-input`
+- `#prompt-api-sampling-mode`
+- `#rewriter-api`
+- `#session-encryption`
+- `#split-view-horizontal`
+- `#summarizer-api`
+- `#test-root-store`
+- `#throttle-repeated-no-damage-frames`
+- `#user-media-element-legacy`
+- `#writer-api`
+
+Newly removed (36):
+
+- `#ai-mode-omnibox-entry-point`
+- `#audio-ducking`
+- `#auto-picture-in-picture-for-video-playback`
+- `#autofill-enable-card-info-runtime-retrieval`
+- `#autofill-enable-support-for-name-and-email-profile`
+- `#autofill-more-prominent-popup`
+- `#autofill-vcn-enroll-strike-expiry-time`
+- `#cast-streaming-media-video-encoder`
+- `#classifier-api-for-tiny-model`
+- `#customize-tab-group-color-palette`
+- `#data-controls-drag-enforcement`
+- `#enable-experimental-accessibility-language-detection`
+- `#enable-extensions-menu-teardown-fix`
+- `#enable-hardware-secure-decryption-experiment`
+- `#extension-manifest-v2-deprecation-unsupported`
+- `#glic-button-auto-summarize`
+- `#glic-detached`
+- `#glic-mi-tab-context-menu`
+- `#horizontal-tab-strip-combo-button`
+- `#launch-queue-stop-sending-on-reload`
+- `#permissions-ai-p92`
+- `#picture-in-picture-show-window-animation`
+- `#privacy-sandbox-internals`
+- `#prompt-api-for-gemini-nano`
+- `#prompt-api-for-gemini-nano-multimodal-input`
+- `#rcaps-dynamic-profile-country`
+- `#read-anything-images-via-algorithm`
+- `#read-anything-immersive-reading-mode`
+- `#rewriter-api-for-gemini-nano`
+- `#save-passwords-contextual-ui`
+- `#summarizer-api-for-gemini-nano`
+- `#ui-automation-provider`
+- `#webrtc-allow-wgc-screen-capturer`
+- `#webui-omnibox-full-popup-v2`
+- `#windows11-mica-titlebar`
+- `#writer-api-for-gemini-nano`
+
+## Android M151 — 151.0.7922.71
+
+Added 36 — Removed 32 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/android/M151.md)
+
+New since last run (36):
+
+- `#allow-multiple-media-notifications`
+- `#android-bricks-native-page`
+- `#android-context-menu-disabled-menu-items`
+- `#android-device-signals-disclaimer`
+- `#autofill-ambient-autofill`
+- `#autofill-enable-resurrecting-payments-users`
+- `#collect-accessibility-heuristic-in-canvas-ukm`
+- `#dbd-password-removal-on-android`
+- `#declarative-performance-observer`
+- `#desktop-fling-curve-on-android`
+- `#devtools-plus-button`
+- `#enable-android-enterprise-screenshot-protection`
+- `#enable-cross-device-theme-tracker`
+- `#enable-dynamic-route-fetching`
+- `#fedcm-native-idps`
+- `#input-cursor-anchor-info-migration`
+- `#long-screenshots-no-memory-check`
+- `#make-identity-manager-source-of-accounts-part2`
+- `#mobile-promo-on-desktop-with-qr-code-wave-2`
+- `#mobile-promo-on-desktop-with-reminder-wave-2`
+- `#omnibox-fusebox-async-inflation`
+- `#partition-alloc-scheduler-loop-quarantine`
+- `#password-save-in-context-error-resolution`
+- `#prefetch-activation-beacon`
+- `#prerender-activation-beacon`
+- `#read-aloud-native`
+- `#session-encryption`
+- `#settings-in-tab`
+- `#tab-search-for-al`
+- `#test-root-store`
+- `#throttle-repeated-no-damage-frames`
+- `#tips-self-service`
+- `#use-p-link-in-help`
+- `#user-feedback-allowed-policy`
+- `#user-media-element-legacy`
+- `#wide-screen-feed-for-foldables`
+
+Newly removed (32):
+
+- `#android-bookmark-bar`
+- `#android-caret-browsing`
+- `#autofill-enable-card-info-runtime-retrieval`
+- `#autofill-enable-support-for-name-and-email-profile`
+- `#autofill-vcn-enroll-strike-expiry-time`
+- `#browser-window-interface-mobile`
+- `#cct-auth-tab`
+- `#chrome-native-url-overriding`
+- `#data-controls-drag-enforcement`
+- `#debug-chime-notification`
+- `#enable-android-omnibox-autofocus-on-incognito-ntp`
+- `#enable-android-reporting-omnibox-autofocus-header`
+- `#enable-experimental-accessibility-language-detection`
+- `#enable-extensions-menu-teardown-fix`
+- `#enable-proxy-authentication-service`
+- `#enable-task-manager-clank`
+- `#fallback-to-sw-if-gles3-not-supported`
+- `#in-flow-trusted-vault-key-retrieval-android`
+- `#launch-queue-stop-sending-on-reload`
+- `#media-indicators-android`
+- `#mojo-use-eventfd`
+- `#ntp-simplification`
+- `#omnibox-improvement-for-lff`
+- `#permissions-ai-p92`
+- `#privacy-sandbox-internals`
+- `#rcaps-dynamic-profile-country`
+- `#reader-mode-distill-in-app`
+- `#reader-mode-improvements`
+- `#search-in-settings`
+- `#settings-multi-column`
+- `#settings-single-activity`
+- `#toolbar-stale-capture-bug-fix`
+
+## iOS M151 — 151.0.7922.57
+
+Added 26 — Removed 17 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/ios/M151.md)
+
+New since last run (26):
+
+- `#ai-avatar-ring-ios`
+- `#alert-crash-fix-kill-switch`
+- `#app-bar-hide-in-fullscreen`
+- `#app-bar-hide-labels`
+- `#app-switcher-ai-summarization`
+- `#ask-gemini-chip-ignore-criteria`
+- `#autofill-ambient-autofill`
+- `#autofill-at-memory`
+- `#composebox-drive-context-menu-option`
+- `#default-bottom-omnibox-on-ios`
+- `#download-list-pagination-ios`
+- `#enable-bulk-data-entry-connector-ios`
+- `#enable-discover-background-refresh`
+- `#gemini-contextual-suggestions-cues`
+- `#gemini-coordinator-teardown-fix`
+- `#gemini-live-dormant-reasons`
+- `#infobar-banner-revamp`
+- `#ios-gemini-bottom-sheet-migration`
+- `#ios-password-manager-actor-login`
+- `#new-tab-page-redesign`
+- `#overflow-menu-home-customization-entrypoint`
+- `#overflow-menu-ntp-refactor`
+- `#password-save-in-context-error-resolution`
+- `#start-surface-user-setting`
+- `#support-google-one-deep-link`
+- `#zero-state-suggestions-wcgd`
+
+Newly removed (17):
+
+- `#aim-cobrowse-debug-entrypoint`
+- `#ask-gemini-chip`
+- `#autofill-enable-card-info-runtime-retrieval`
+- `#autofill-enable-support-for-name-and-email-profile`
+- `#autofill-vcn-enroll-strike-expiry-time`
+- `#gemini-copresence`
+- `#gemini-dynamic-settings`
+- `#gemini-floaty-all-pages`
+- `#gemini-maps-rich-ui`
+- `#in-flow-trusted-vault-key-retrieval-ios`
+- `#ios-bottom-sheet-migration`
+- `#ios-keyboard-accessory-two-bubble`
+- `#most-visited-tiles-customization-ios`
+- `#rcaps-dynamic-profile-country`
+- `#show-tab-group-in-grid-on-start`
+- `#tab-grid-new-transitions`
+- `#tab-group-color-on-surface`
