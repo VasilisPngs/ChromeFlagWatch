@@ -12,7 +12,6 @@ RAW = "https://raw.githubusercontent.com/chromium/chromium"
 ROOT = Path(__file__).parent
 STATE = ROOT / "state"
 REPORTS = ROOT / "reports"
-METADATA = "chrome/browser/flag-metadata.json"
 
 SOURCES = {
     "desktop": {
@@ -65,7 +64,6 @@ STRING_RE = re.compile(
     re.S,
 )
 LITERAL_RE = re.compile(r'"((?:[^"\\]|\\.)*)"')
-LINE_COMMENT_RE = re.compile(r"^\s*//.*$", re.M)
 
 
 def fetch(url, allow_missing=False):
@@ -129,13 +127,6 @@ def parse_strings(text):
     return result
 
 
-def parse_metadata(text):
-    if not text:
-        return {}
-    data = json.loads(LINE_COMMENT_RE.sub("", text))
-    return {item["name"]: item.get("expiry_milestone", -1) for item in data}
-
-
 def snapshot(version, source, cache):
     key = (version, source)
     if key in cache:
@@ -144,9 +135,6 @@ def snapshot(version, source, cache):
     data = {
         "entries": parse_entries(gather(version, spec["entries"])),
         "strings": parse_strings(gather(version, spec["strings"])),
-        "expiry": parse_metadata(
-            fetch(f"{RAW}/{version}/{METADATA}", allow_missing=True)
-        ),
     }
     cache[key] = data
     return data
@@ -160,16 +148,9 @@ def select(data, tokens):
     }
 
 
-def describe(name, entry, data, milestone):
+def describe(name, entry, data):
     title = data["strings"].get(entry["title_key"], name)
     body = data["strings"].get(entry["desc_key"], "")
-    expiry = data["expiry"].get(name, -1)
-    if expiry == -1:
-        life = "never expires"
-    elif expiry < milestone:
-        life = f"expired at M{expiry}, hidden unless --no-expire-flags"
-    else:
-        life = f"expires M{expiry}"
     return "\n".join(
         [
             f"### `#{name}`",
@@ -177,7 +158,7 @@ def describe(name, entry, data, milestone):
             "",
             body,
             "",
-            f"`chrome://flags/#{name}` — {' '.join(entry['os'])} — {life}",
+            f"`chrome://flags/#{name}`",
             "",
         ]
     )
@@ -196,7 +177,7 @@ def render(platform, version, milestone, baseline, baseline_milestone, new, sele
         lines.append(f"## Added ({len(added)})")
         lines.append("")
         for name in added:
-            lines.append(describe(name, selected[name], new, milestone))
+            lines.append(describe(name, selected[name], new))
     return "\n".join(lines)
 
 
