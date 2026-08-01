@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  issues: write
 
 concurrency:
   group: flagwatch
@@ -32,7 +31,6 @@ jobs:
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
-          echo "notify=$(cat last_run.notify)" >> "$GITHUB_OUTPUT"
 
       - name: Commit
         if: steps.diff.outputs.changed == 'true'
@@ -42,16 +40,6 @@ jobs:
           git add -A
           git commit -m "flags: $(cat last_run.title)"
           git push
-
-      - name: Notify
-        if: steps.diff.outputs.notify == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh issue create \
-            --title "$(cat last_run.title)" \
-            --body-file last_run.md \
-            --assignee "${{ github.repository_owner }}"
 
       - name: Job summary
         if: always()
