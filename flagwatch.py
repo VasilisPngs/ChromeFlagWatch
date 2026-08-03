@@ -264,8 +264,6 @@ def main():
             }
         )
 
-    (ROOT / "last_run.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-
     notify = [item for item in summary if item["fresh"]]
     body, title = notification(notify, base_url)
     (ROOT / "last_run.md").write_text(body, encoding="utf-8")
