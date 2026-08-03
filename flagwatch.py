@@ -1,7 +1,7 @@
+import gzip
 import json
 import os
 import re
-import sys
 import time
 import urllib.error
 import urllib.request
@@ -11,22 +11,15 @@ DASH = "https://chromiumdash.appspot.com/fetch_releases"
 RAW = "https://raw.githubusercontent.com/chromium/chromium"
 ROOT = Path(__file__).parent
 STATE = ROOT / "state"
-REPORTS = ROOT / "reports"
 
 SOURCES = {
     "desktop": {
-        "entries": ["chrome/browser/about_flags.cc"],
-        "strings": [
-            "chrome/browser/flag_descriptions.h",
-            "chrome/browser/flag_descriptions.cc",
-        ],
+        "entries": "chrome/browser/about_flags.cc",
+        "strings": "chrome/browser/flag_descriptions.h",
     },
     "ios": {
-        "entries": ["ios/chrome/browser/flags/about_flags.mm"],
-        "strings": [
-            "ios/chrome/browser/flags/ios_chrome_flag_descriptions.h",
-            "ios/chrome/browser/flags/ios_chrome_flag_descriptions.mm",
-        ],
+        "entries": "ios/chrome/browser/flags/about_flags.mm",
+        "strings": "ios/chrome/browser/flags/ios_chrome_flag_descriptions.h",
     },
 }
 
@@ -55,62 +48,60 @@ ENTRY_RE = re.compile(
     r'\{\s*"(?P<name>[A-Za-z0-9][A-Za-z0-9\-\._]*)"\s*,\s*'
     r"flag_descriptions::(?P<title>k[A-Za-z0-9_]+)\s*,\s*"
     r"flag_descriptions::(?P<desc>k[A-Za-z0-9_]+)\s*,\s*"
-    r"(?P<os>[A-Za-z0-9_ \|\n:]+?)\s*,",
-    re.S,
+    r"(?P<os>[A-Za-z0-9_ \|\n:]+?)\s*,"
 )
 STRING_RE = re.compile(
     r"(?:inline\s+)?(?:constexpr\s+)?(?:const\s+)?char\s+(k[A-Za-z0-9_]+)\s*\[\]\s*=\s*"
     r'((?:\s*"(?:[^"\\]|\\.)*")+)\s*;',
     re.S,
 )
-LITERAL_RE = re.compile(r'"((?:[^"\\]|\\.)*)"')
+LITERAL_RE = re.compile(r'"((?:[^"\\]|\\.)*)"', re.S)
+ESCAPE_RE = re.compile(r"(?:\\x[0-9a-fA-F]{2})+|\\u([0-9a-fA-F]{4})|\\(.)", re.S)
+ESCAPES = {"n": "\n", "t": "\t", "r": "\r", "\n": ""}
 
 
-def fetch(url, allow_missing=False):
+def fetch(url):
+    headers = {"User-Agent": "flagwatch", "Accept-Encoding": "gzip"}
     for attempt in range(4):
         try:
-            request = urllib.request.Request(url, headers={"User-Agent": "flagwatch"})
+            request = urllib.request.Request(url, headers=headers)
             with urllib.request.urlopen(request, timeout=60) as response:
-                return response.read().decode("utf-8", "replace")
+                body = response.read()
+                encoding = response.headers.get("Content-Encoding", "")
+                if encoding.lower() == "gzip":
+                    body = gzip.decompress(body)
+                return body.decode("utf-8", "replace")
         except urllib.error.HTTPError as error:
-            if error.code == 404 and allow_missing:
-                return None
             if error.code in (403, 429, 500, 502, 503) and attempt < 3:
                 time.sleep(3 * (attempt + 1))
                 continue
             raise
-        except urllib.error.URLError:
+        except OSError:
             if attempt < 3:
                 time.sleep(3 * (attempt + 1))
                 continue
             raise
-    return None
 
 
-def releases(platform, count):
-    return json.loads(fetch(f"{DASH}?channel=Stable&platform={platform}&num={count}"))
-
-
-def gather(version, paths):
-    chunks = []
-    for path in paths:
-        body = fetch(f"{RAW}/{version}/{path}", allow_missing=True)
-        if body:
-            chunks.append(body)
-    return "\n".join(chunks)
+def expand(match):
+    run, point, char = match.group(0), match.group(1), match.group(2)
+    if char is not None:
+        return ESCAPES.get(char, char)
+    if point is not None:
+        return chr(int(point, 16))
+    return bytes.fromhex(run.replace("\\x", "")).decode("utf-8", "replace")
 
 
 def parse_entries(text):
     result = {}
     for match in ENTRY_RE.finditer(text):
-        tokens = {
-            token.strip().replace("flags_ui::", "")
-            for token in match.group("os").split("|")
-        }
         result[match.group("name")] = {
             "title_key": match.group("title"),
             "desc_key": match.group("desc"),
-            "os": sorted(tokens),
+            "os": {
+                token.strip().replace("flags_ui::", "")
+                for token in match.group("os").split("|")
+            },
         }
     return result
 
@@ -119,38 +110,37 @@ def parse_strings(text):
     result = {}
     for match in STRING_RE.finditer(text):
         joined = "".join(LITERAL_RE.findall(match.group(2)))
-        try:
-            joined = joined.encode("latin-1", "ignore").decode("unicode_escape")
-        except UnicodeDecodeError:
-            pass
-        result[match.group(1)] = joined.strip()
+        result[match.group(1)] = ESCAPE_RE.sub(expand, joined).strip()
     return result
 
 
-def snapshot(version, source, cache):
-    key = (version, source)
-    if key in cache:
-        return cache[key]
-    spec = SOURCES[source]
-    data = {
-        "entries": parse_entries(gather(version, spec["entries"])),
-        "strings": parse_strings(gather(version, spec["strings"])),
-    }
-    cache[key] = data
+PARSERS = {"entries": parse_entries, "strings": parse_strings}
+
+
+def load(kind, version, source, cache):
+    key = (kind, version, source)
+    data = cache.get(key)
+    if data is None:
+        data = PARSERS[kind](fetch(f"{RAW}/{version}/{SOURCES[source][kind]}"))
+        cache[key] = data
     return data
 
 
-def select(data, tokens):
-    return {
-        name: entry
-        for name, entry in data["entries"].items()
-        if tokens & set(entry["os"])
-    }
+def releases(platform, count):
+    return json.loads(fetch(f"{DASH}?channel=Stable&platform={platform}&num={count}"))
 
 
-def describe(name, entry, data):
-    title = data["strings"].get(entry["title_key"], name)
-    body = data["strings"].get(entry["desc_key"], "")
+def select(entries, tokens):
+    return {name: entry for name, entry in entries.items() if tokens & entry["os"]}
+
+
+def select_names(entries, tokens):
+    return {name for name, entry in entries.items() if tokens & entry["os"]}
+
+
+def describe(name, entry, strings):
+    title = strings.get(entry["title_key"], name)
+    body = strings.get(entry["desc_key"], "")
     return "\n".join(
         [
             f"### `#{name}`",
@@ -164,7 +154,7 @@ def describe(name, entry, data):
     )
 
 
-def render(platform, version, milestone, baseline, baseline_milestone, new, selected, added):
+def render(platform, version, milestone, baseline, baseline_milestone, strings, selected, added):
     lines = [
         f"# Chrome {platform['label']} Stable M{milestone} — {version}",
         "",
@@ -177,7 +167,7 @@ def render(platform, version, milestone, baseline, baseline_milestone, new, sele
         lines.append(f"## Added ({len(added)})")
         lines.append("")
         for name in added:
-            lines.append(describe(name, selected[name], new))
+            lines.append(describe(name, selected[name], strings))
     return "\n".join(lines)
 
 
@@ -204,12 +194,11 @@ def notification(notify, base_url):
 def main():
     base_url = os.environ.get("REPORT_BASE_URL", "").rstrip("/")
     STATE.mkdir(exist_ok=True)
-    REPORTS.mkdir(exist_ok=True)
     cache = {}
     summary = []
 
     for key, platform in PLATFORMS.items():
-        history = releases(platform["dash"], 100)
+        history = releases(platform["dash"], 60)
         if not history:
             continue
         version = history[0]["version"]
@@ -226,14 +215,18 @@ def main():
         baseline = newest[baseline_milestone]
 
         state_file = STATE / f"{key}.json"
-        previous = json.loads(state_file.read_text()) if state_file.exists() else {}
+        previous = (
+            json.loads(state_file.read_text(encoding="utf-8"))
+            if state_file.exists()
+            else {}
+        )
         if previous.get("version") == version and previous.get("baseline") == baseline:
             continue
 
-        new = snapshot(version, platform["source"], cache)
-        old = snapshot(baseline, platform["source"], cache)
-        selected = select(new, platform["tokens"])
-        old_names = set(select(old, platform["tokens"]))
+        source = platform["source"]
+        tokens = platform["tokens"]
+        selected = select(load("entries", version, source, cache), tokens)
+        old_names = select_names(load("entries", baseline, source, cache), tokens)
         added = sorted(set(selected) - old_names)
 
         report_path = f"reports/{key}/M{milestone}.md"
@@ -242,7 +235,7 @@ def main():
         destination.write_text(
             render(
                 platform, version, milestone, baseline, baseline_milestone,
-                new, selected, added,
+                load("strings", version, source, cache), selected, added,
             ),
             encoding="utf-8",
         )
@@ -263,25 +256,20 @@ def main():
         summary.append(
             {
                 "platform": platform["label"],
-                "key": key,
                 "version": version,
                 "milestone": milestone,
                 "added": added,
                 "fresh": fresh,
-                "notify": bool(fresh),
                 "report": report_path,
             }
         )
 
-    (ROOT / "last_run.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-
-    notify = [item for item in summary if item["notify"]]
+    notify = [item for item in summary if item["fresh"]]
     body, title = notification(notify, base_url)
     (ROOT / "last_run.md").write_text(body, encoding="utf-8")
     (ROOT / "last_run.title").write_text(title or "no flag changes", encoding="utf-8")
     print(title or "no flag changes")
-    return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

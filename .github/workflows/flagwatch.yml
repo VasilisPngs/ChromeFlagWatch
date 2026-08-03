@@ -15,6 +15,7 @@ concurrency:
 jobs:
   watch:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
 
@@ -23,24 +24,21 @@ jobs:
           REPORT_BASE_URL: ${{ github.server_url }}/${{ github.repository }}/blob/main
         run: python3 flagwatch.py
 
-      - name: Detect changes
-        id: diff
+      - name: Job summary
         run: |
-          if [ -n "$(git status --porcelain reports state)" ]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          fi
+          {
+            echo "## $(cat last_run.title)"
+            echo
+            cat last_run.md
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Commit
-        if: steps.diff.outputs.changed == 'true'
         run: |
+          if [ -z "$(git status --porcelain reports state)" ]; then
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
+          git add reports state last_run.md last_run.title
           git commit -m "flags: $(cat last_run.title)"
           git push
-
-      - name: Job summary
-        if: always()
-        run: cat last_run.md >> "$GITHUB_STEP_SUMMARY" || true
