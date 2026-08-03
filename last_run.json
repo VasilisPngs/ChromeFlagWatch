@@ -1,7 +1,6 @@
 [
   {
     "platform": "Windows",
-    "key": "windows",
     "version": "151.0.7922.72",
     "milestone": 151,
     "added": [
@@ -106,12 +105,10 @@
       "user-media-element-legacy",
       "writer-api"
     ],
-    "notify": true,
     "report": "reports/windows/M151.md"
   },
   {
     "platform": "Android",
-    "key": "android",
     "version": "151.0.7922.71",
     "milestone": 151,
     "added": [
@@ -190,12 +187,10 @@
       "user-media-element-legacy",
       "wide-screen-feed-for-foldables"
     ],
-    "notify": true,
     "report": "reports/android/M151.md"
   },
   {
     "platform": "iOS",
-    "key": "ios",
     "version": "151.0.7922.57",
     "milestone": 151,
     "added": [
@@ -254,7 +249,6 @@
       "support-google-one-deep-link",
       "zero-state-suggestions-wcgd"
     ],
-    "notify": true,
     "report": "reports/ios/M151.md"
   }
 ]
