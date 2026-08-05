@@ -1,5 +1,5 @@
 {
-  "version": "151.0.7922.57",
+  "version": "151.0.7922.105",
   "milestone": 151,
   "baseline": "150.0.7871.113",
   "added": [
@@ -23,6 +23,7 @@
     "ios-gemini-bottom-sheet-migration",
     "ios-password-manager-actor-login",
     "new-tab-page-redesign",
+    "next-old-design",
     "overflow-menu-home-customization-entrypoint",
     "overflow-menu-ntp-refactor",
     "password-save-in-context-error-resolution",

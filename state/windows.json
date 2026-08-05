@@ -1,7 +1,7 @@
 {
-  "version": "151.0.7922.72",
+  "version": "151.0.7922.76",
   "milestone": 151,
-  "baseline": "150.0.7871.188",
+  "baseline": "150.0.7871.189",
   "added": [
     "antivirus-telemetry-for-downloads",
     "api-contextual-tasks-private",
