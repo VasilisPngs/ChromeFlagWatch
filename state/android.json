@@ -1,7 +1,7 @@
 {
-  "version": "151.0.7922.83",
+  "version": "151.0.7922.108",
   "milestone": 151,
-  "baseline": "150.0.7871.188",
+  "baseline": "150.0.7871.189",
   "added": [
     "allow-multiple-media-notifications",
     "android-bricks-native-page",
