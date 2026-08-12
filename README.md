@@ -1,9 +1,3 @@
-# ChromeFlagWatch
-
-**ChromeFlagWatch watches Google Chrome for new experimental flags and shows you what has changed.**
-
-They can be useful if you want to try new Chrome features before they become available normally.
-
 ## What does ChromeFlagWatch do?
 
 When a new Chrome version is released, ChromeFlagWatch checks the available flags and looks for flags that were not present in the previous Stable version.
