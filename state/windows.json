@@ -1,5 +1,5 @@
 {
-  "version": "151.0.7922.77",
+  "version": "151.0.7922.138",
   "milestone": 151,
   "baseline": "150.0.7871.189",
   "added": [
@@ -26,6 +26,7 @@
     "enable-oauth-multilogin-youtube-cookies-binding",
     "enable-realbox-virtual-focus",
     "glic-actor-autofill-pre-click",
+    "glic-context-menu-below-search",
     "glic-experimental-triggering-screenshot",
     "glic-hotkey-local-scope",
     "infobar-inline-links",
@@ -44,6 +45,7 @@
     "prompt-api",
     "prompt-api-multimodal-input",
     "prompt-api-sampling-mode",
+    "read-anything-read-aloud-phrase-highlighting-v2",
     "rewriter-api",
     "session-encryption",
     "split-view-horizontal",
