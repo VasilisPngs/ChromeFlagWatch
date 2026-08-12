@@ -1,78 +1,99 @@
 # ChromeFlagWatch
 
-ChromeFlagWatch monitors the Chromium source for newly introduced Chrome flags and reports changes between Chrome Stable milestones.
+**ChromeFlagWatch watches Google Chrome for new experimental flags and shows you what has changed.**
 
-## What it does
+You do not need to know how the project works. If you just want to see which new Chrome flags have appeared, this repository gives you an easy way to find them.
 
-For each supported platform, ChromeFlagWatch:
+## What is a Chrome Flag?
 
-- Checks the latest Chrome Stable release.
-- Compares its available `chrome://flags` entries with the previous Stable milestone.
-- Detects flags that are newly present in the current milestone.
-- Generates a per-platform Markdown report containing the new flag name, title, description, and direct `chrome://flags/#...` URL.
-- Keeps platform state so future runs can identify only changes that were not reported before.
-- Publishes the generated reports automatically through GitHub Actions.
+Chrome Flags are experimental features that you can turn on or off in Chrome.
 
-Chrome flags are experimental features. Google notes that they can change, break, or be removed without notice, so ChromeFlagWatch is intended for monitoring and discovery rather than treating flags as permanent Chrome settings.
+You can find them by opening:
+
+`chrome://flags`
+
+They can be useful if you want to try new Chrome features before they become available normally.
+
+## What does ChromeFlagWatch do?
+
+When a new Chrome version is released, ChromeFlagWatch checks the available flags and looks for flags that were not present in the previous Stable version.
+
+It then creates a simple report showing:
+
+- The new flag's name
+- What the flag does
+- Which platform it is available on
+- A direct `chrome://flags/#...` link to the flag
+
+The project runs automatically, so the reports are updated as new Chrome Stable versions appear.
 
 ## Supported platforms
 
-ChromeFlagWatch currently monitors:
+ChromeFlagWatch currently tracks Chrome on:
 
 - **Windows**
 - **Android**
-- **iOS**
+- **iOS (iPhone and iPad)**
 
-The platform detection is based on the Chromium source code and the operating-system tokens used by Chrome's flag definitions. macOS and Linux are not currently tracked by this project.
+macOS and Linux are not currently tracked.
 
-## Where to find new flags
+## Where can I see the new flags?
 
-The easiest place to see the latest changes is the `reports/` directory:
+Go to the folder for your device:
 
-- [`reports/windows/`](reports/windows/) — Windows flags
-- [`reports/android/`](reports/android/) — Android flags
-- [`reports/ios/`](reports/ios/) — iOS flags
+- **Windows:** [`reports/windows/`](reports/windows/)
+- **Android:** [`reports/android/`](reports/android/)
+- **iPhone/iPad:** [`reports/ios/`](reports/ios/)
 
-Each milestone report lists the flags newly detected for that platform. For example:
+Inside each folder, you will find reports for different Chrome versions, for example:
 
-`reports/android/M151.md`
+`M151.md`
 
-Each reported flag also includes its direct Chrome URL, such as:
+The `M151` means **Chrome version 151**.
 
-`chrome://flags/#flag-name`
+Open the report for the latest version to see which new flags were added.
 
-You can open `chrome://flags` in Chrome and search for the flag name. Google documents `chrome://flags` as the place where available experimental Chrome flags can be enabled or disabled.
+## How do I use a flag?
 
-## Official sources
+1. Open Chrome.
+2. Open `chrome://flags`.
+3. Search for the flag you found in ChromeFlagWatch.
+4. Select the option you want.
+5. Restart Chrome if Chrome asks you to.
 
-ChromeFlagWatch reads the flag definitions directly from the [Chromium source code](https://chromium.googlesource.com/chromium/src/) and uses Chrome Stable release information to determine the current and previous milestones.
+Each report also includes the direct address of the flag, for example:
 
-For general information about Chrome flags, see Google's official documentation:
+`chrome://flags/#example-flag`
 
-- [Learn about Chrome flags](https://support.google.com/chrome/answer/16552482)
-- [Chrome flags for developers](https://developer.chrome.com/docs/web-platform/chrome-flags)
+## Important
+
+Chrome Flags are **experimental**. They are not normal Chrome settings.
+
+A flag can:
+
+- Change or stop working in a future Chrome version.
+- Be removed completely.
+- Become available by default and no longer need a flag.
+- Cause unexpected behaviour in Chrome.
+
+Use them only if you understand that they can change at any time.
+
+## Where does the information come from?
+
+ChromeFlagWatch gets Chrome's flag information directly from the **Chromium project**, the open-source project behind Google Chrome.
+
+The project also checks Chrome Stable release information to compare the current version with the previous one.
 
 ## Automatic updates
 
-GitHub Actions runs ChromeFlagWatch automatically every day and can also be triggered manually. When a new flag is detected, the corresponding report and state files are committed to the repository.
+ChromeFlagWatch runs automatically every day using GitHub Actions.
 
-This means the repository can be used as a historical record of Chrome flag changes across Stable milestones.
+When new flags are found, the project creates or updates the corresponding report in this repository.
 
-## Repository structure
+This also means that the repository keeps a history of Chrome flag changes over time.
 
-```text
-.
-├── flagwatch.py
-├── reports/
-│   ├── android/
-│   ├── ios/
-│   └── windows/
-├── state/
-├── last_run.md
-├── last_run.title
-└── .github/workflows/flagwatch.yml
-```
+## For developers
 
-## Important note
+ChromeFlagWatch is a small Python project. The main script is [`flagwatch.py`](flagwatch.py), while the generated reports are stored under [`reports/`](reports/).
 
-Chrome flags are experimental and are not guaranteed to remain available. A flag may be renamed, changed, moved to another platform, enabled by default, or removed entirely in a later Chrome release.
+The project does not modify Chrome or enable any flags on your device. It only monitors the Chromium source and reports changes.
