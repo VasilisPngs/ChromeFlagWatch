@@ -25,20 +25,17 @@ SOURCES = {
 
 PLATFORMS = {
     "windows": {
-        "label": "Windows",
-        "dash": "Windows",
+        "name": "Windows",
         "source": "desktop",
         "tokens": {"kOsWin", "kOsAll", "kOsDesktop", "kOsAura"},
     },
     "android": {
-        "label": "Android",
-        "dash": "Android",
+        "name": "Android",
         "source": "desktop",
         "tokens": {"kOsAndroid", "kOsAll"},
     },
     "ios": {
-        "label": "iOS",
-        "dash": "iOS",
+        "name": "iOS",
         "source": "ios",
         "tokens": {"kOsIos"},
     },
@@ -126,8 +123,8 @@ def load(kind, version, source, cache):
     return data
 
 
-def releases(platform, count):
-    return json.loads(fetch(f"{DASH}?channel=Stable&platform={platform}&num={count}"))
+def releases(platform):
+    return json.loads(fetch(f"{DASH}?channel=Stable&platform={platform}&num=60"))
 
 
 def select(entries, tokens):
@@ -156,7 +153,7 @@ def describe(name, entry, strings):
 
 def render(platform, version, milestone, baseline, baseline_milestone, strings, selected, added):
     lines = [
-        f"# Chrome {platform['label']} Stable M{milestone} — {version}",
+        f"# Chrome {platform['name']} Stable M{milestone} — {version}",
         "",
         f"Baseline M{baseline_milestone} — {baseline}",
         "",
@@ -198,7 +195,7 @@ def main():
     summary = []
 
     for key, platform in PLATFORMS.items():
-        history = releases(platform["dash"], 60)
+        history = releases(platform["name"])
         if not history:
             continue
         version = history[0]["version"]
@@ -255,7 +252,7 @@ def main():
         fresh = sorted(set(added) - set(previous.get("added", [])))
         summary.append(
             {
-                "platform": platform["label"],
+                "platform": platform["name"],
                 "version": version,
                 "milestone": milestone,
                 "added": added,
