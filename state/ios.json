@@ -1,5 +1,5 @@
 {
-  "version": "152.0.7977.40",
+  "version": "152.0.7977.53",
   "milestone": 152,
   "baseline": "151.0.7922.112",
   "added": [
@@ -8,6 +8,7 @@
     "contextual-tasks",
     "enable-enterprise-watermarking-ios",
     "gaia-auth-fetcher-dont-send-sid-cookies",
+    "gemini-experimental-guided-onboarding",
     "gemini-fre-refactor",
     "gemini-quizzes",
     "glass-toolbar",

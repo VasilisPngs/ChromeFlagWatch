@@ -1,100 +1,61 @@
-## Windows M151 — 151.0.7922.170
+## Windows M152 — 152.0.7977.54
 
-Added 51 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/windows/M151.md)
+Added 47 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/windows/M152.md)
 
-New since last run (51):
+New since last run (47):
 
-- `#antivirus-telemetry-for-downloads`
-- `#api-contextual-tasks-private`
-- `#autofill-ambient-autofill`
-- `#autofill-enable-ai-card-recommendation`
-- `#autofill-enable-resurrecting-payments-users`
-- `#cast-streaming-hardware-av1`
-- `#cast-streaming-max-video-bitrate`
-- `#chrome-dark-neutrals-26`
-- `#classifier-api`
-- `#collapse-tab-group-during-drag`
-- `#collect-accessibility-heuristic-in-canvas-ukm`
-- `#context-containers`
-- `#cross-device-signin-from-desktop`
-- `#declarative-performance-observer`
-- `#device-signals-backfill-disclaimer`
-- `#devtools-plus-button`
-- `#dictation`
-- `#enable-cookie-binding-cookie-upgrade`
-- `#enable-cross-device-theme-tracker`
-- `#enable-http-headers-injection`
-- `#enable-oauth-multilogin-youtube-cookies-binding`
-- `#enable-realbox-virtual-focus`
-- `#glic-actor-autofill-pre-click`
-- `#glic-context-menu-below-search`
-- `#glic-experimental-triggering-screenshot`
-- `#glic-hotkey-local-scope`
-- `#infobar-inline-links`
-- `#mobile-promo-on-desktop-with-qr-code-wave-2`
-- `#mobile-promo-on-desktop-with-reminder-wave-2`
-- `#ntp-realbox-dynamic-ai-mode-button`
-- `#omnibox-dynamic-ai-mode-button`
-- `#omnibox-loom`
-- `#on-device-model-speculative-decoding`
-- `#partition-alloc-scheduler-loop-quarantine`
-- `#password-save-in-context-error-resolution`
-- `#password-save-update-dropdown-menu-experiment`
-- `#populate-dom-node-id-in-focused-node-details`
-- `#prefetch-activation-beacon`
-- `#prerender-activation-beacon`
-- `#prompt-api`
-- `#prompt-api-multimodal-input`
-- `#prompt-api-sampling-mode`
-- `#read-anything-read-aloud-phrase-highlighting-v2`
-- `#rewriter-api`
-- `#session-encryption`
-- `#split-view-horizontal`
-- `#summarizer-api`
-- `#test-root-store`
-- `#throttle-repeated-no-damage-frames`
-- `#user-media-element-legacy`
-- `#writer-api`
+- `#aim-3p-entrypoint`
+- `#aim-eligibility-component-extension`
+- `#camera-and-microphone-elements`
+- `#cast-mirroring-native-nv12`
+- `#composebox-skills-contextual-tasks`
+- `#composebox-skills-ntp`
+- `#composebox-skills-omnibox-everywhere`
+- `#composebox-skills-omnibox-popup`
+- `#devtools-instrumentation-breakpoints`
+- `#devtools-mobile-safe-area-emulation`
+- `#enable-account-preview-data`
+- `#enable-account-preview-entity-previews`
+- `#enable-account-preview-preferred-account`
+- `#enable-ai-subscription-avatar-ring`
+- `#enable-content-analysis-clipboard-copy`
+- `#enable-global-privacy-control`
+- `#enable-oauth-multilogin-standard-cookies-binding`
+- `#enable-user-navigation-capturing-pwa-testing-override`
+- `#enterprise-published-skills-policy-enabled`
+- `#export-platform-policies-json`
+- `#force-ai-subscription-tier`
+- `#glic-gemini-enterprise-consent-enabled`
+- `#glic-opt-in-dialog-a11y-fix`
+- `#glic-opt-in-dialog-link-a11y-fix`
+- `#glic-settings-a11y-context-fix`
+- `#glic-spark-settings-accessible-labels`
+- `#glic-tab-groups`
+- `#linked-accounts`
+- `#magichrome-passkey-signin`
+- `#multistep-filter`
+- `#native-view-host-manages-layers`
+- `#notebook-home-url`
+- `#notebooks`
+- `#ntp-scaled-action-chips`
+- `#ntp-scaled-action-chips-small`
+- `#ntp-threads-rail`
+- `#organizer-panel`
+- `#payment-handler-camera-access`
+- `#pdf-brotli-decode`
+- `#read-anything-improved-ui`
+- `#safe-browsing-local-lists-use-sbv5`
+- `#semantic-embedder-api`
+- `#tab-strip-unification`
+- `#variable-system-font-support-on-windows`
+- `#visual-guided-setter-docking`
+- `#webui-omnibox-ask-g-about-this-page`
+- `#webui-rounded-icons`
 
-## Android M151 — 151.0.7922.169
+## iOS M152 — 152.0.7977.53
 
-Added 36 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/android/M151.md)
+Added 17 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/ios/M152.md)
 
-New since last run (36):
+New since last run (1):
 
-- `#allow-multiple-media-notifications`
-- `#android-bricks-native-page`
-- `#android-context-menu-disabled-menu-items`
-- `#android-device-signals-disclaimer`
-- `#autofill-ambient-autofill`
-- `#autofill-enable-resurrecting-payments-users`
-- `#collect-accessibility-heuristic-in-canvas-ukm`
-- `#dbd-password-removal-on-android`
-- `#declarative-performance-observer`
-- `#desktop-fling-curve-on-android`
-- `#devtools-plus-button`
-- `#enable-android-enterprise-screenshot-protection`
-- `#enable-cross-device-theme-tracker`
-- `#enable-dynamic-route-fetching`
-- `#fedcm-native-idps`
-- `#input-cursor-anchor-info-migration`
-- `#long-screenshots-no-memory-check`
-- `#make-identity-manager-source-of-accounts-part2`
-- `#mobile-promo-on-desktop-with-qr-code-wave-2`
-- `#mobile-promo-on-desktop-with-reminder-wave-2`
-- `#omnibox-fusebox-async-inflation`
-- `#partition-alloc-scheduler-loop-quarantine`
-- `#password-save-in-context-error-resolution`
-- `#prefetch-activation-beacon`
-- `#prerender-activation-beacon`
-- `#read-aloud-native`
-- `#session-encryption`
-- `#settings-in-tab`
-- `#tab-search-for-al`
-- `#test-root-store`
-- `#throttle-repeated-no-damage-frames`
-- `#tips-self-service`
-- `#use-p-link-in-help`
-- `#user-feedback-allowed-policy`
-- `#user-media-element-legacy`
-- `#wide-screen-feed-for-foldables`
+- `#gemini-experimental-guided-onboarding`
