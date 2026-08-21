@@ -1,49 +1,100 @@
-## Android M152 — 152.0.7977.54
+## Windows M151 — 151.0.7922.174
 
-Added 43 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/android/M152.md)
+Added 51 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/windows/M151.md)
 
-New since last run (43):
+New since last run (51):
 
-- `#aim-eligibility-component-extension`
-- `#android-desktop-bookmark-popup`
-- `#android-pdf-reuse-fragment`
-- `#autofill-enable-pay-now-pay-later-tabs`
-- `#bookmarks-bar-context-menu`
-- `#bottom-sheet-on-desktop-windowing`
-- `#camera-and-microphone-elements`
-- `#cct-navigation-info-screenshot`
-- `#cct-tab-resumption`
-- `#chrome-native-url-overriding`
-- `#context-management-in-composebox`
-- `#contextual-panel-close-button`
-- `#cross-window-tab-group-operations`
-- `#devtools-instrumentation-breakpoints`
-- `#devtools-mobile-safe-area-emulation`
-- `#enable-accessibility-android-math`
-- `#enable-account-preview-data`
-- `#enable-account-preview-entity-previews`
-- `#enable-account-preview-preferred-account`
-- `#enable-ai-subscription-avatar-ring`
-- `#enable-global-privacy-control`
-- `#force-ai-subscription-tier`
-- `#glic-tab-groups`
-- `#in-app-window-manager-deprecation`
-- `#inline-pdf-v2-incognito`
-- `#ntp-aurora`
-- `#ntp-customize-webui-android`
-- `#ntp-vision`
-- `#omnibox-aim-image-downscaling`
-- `#omnibox-cross-device-tab-zero-suggest`
-- `#omnibox-list-menu-context-menu`
-- `#safe-browsing-local-lists-use-sbv5`
-- `#safety-fre-promo`
-- `#side-panel-top-hairline-refactor-android`
-- `#submenus-in-app-menu-lff`
-- `#suspicious-site-warnings`
-- `#tab-android-graceful-shutdown`
-- `#tab-search-for-desktop`
-- `#tab-sharing-toolbar-android`
-- `#text-highlight-full-link`
-- `#toolbar-progress-bar-refactor`
-- `#universal-keyboard-handling`
-- `#webui-android-theming`
+- `#antivirus-telemetry-for-downloads`
+- `#api-contextual-tasks-private`
+- `#autofill-ambient-autofill`
+- `#autofill-enable-ai-card-recommendation`
+- `#autofill-enable-resurrecting-payments-users`
+- `#cast-streaming-hardware-av1`
+- `#cast-streaming-max-video-bitrate`
+- `#chrome-dark-neutrals-26`
+- `#classifier-api`
+- `#collapse-tab-group-during-drag`
+- `#collect-accessibility-heuristic-in-canvas-ukm`
+- `#context-containers`
+- `#cross-device-signin-from-desktop`
+- `#declarative-performance-observer`
+- `#device-signals-backfill-disclaimer`
+- `#devtools-plus-button`
+- `#dictation`
+- `#enable-cookie-binding-cookie-upgrade`
+- `#enable-cross-device-theme-tracker`
+- `#enable-http-headers-injection`
+- `#enable-oauth-multilogin-youtube-cookies-binding`
+- `#enable-realbox-virtual-focus`
+- `#glic-actor-autofill-pre-click`
+- `#glic-context-menu-below-search`
+- `#glic-experimental-triggering-screenshot`
+- `#glic-hotkey-local-scope`
+- `#infobar-inline-links`
+- `#mobile-promo-on-desktop-with-qr-code-wave-2`
+- `#mobile-promo-on-desktop-with-reminder-wave-2`
+- `#ntp-realbox-dynamic-ai-mode-button`
+- `#omnibox-dynamic-ai-mode-button`
+- `#omnibox-loom`
+- `#on-device-model-speculative-decoding`
+- `#partition-alloc-scheduler-loop-quarantine`
+- `#password-save-in-context-error-resolution`
+- `#password-save-update-dropdown-menu-experiment`
+- `#populate-dom-node-id-in-focused-node-details`
+- `#prefetch-activation-beacon`
+- `#prerender-activation-beacon`
+- `#prompt-api`
+- `#prompt-api-multimodal-input`
+- `#prompt-api-sampling-mode`
+- `#read-anything-read-aloud-phrase-highlighting-v2`
+- `#rewriter-api`
+- `#session-encryption`
+- `#split-view-horizontal`
+- `#summarizer-api`
+- `#test-root-store`
+- `#throttle-repeated-no-damage-frames`
+- `#user-media-element-legacy`
+- `#writer-api`
+
+## Android M151 — 151.0.7922.173
+
+Added 36 — [full report](https://github.com/VasilisPngs/ChromeFlagWatch/blob/main/reports/android/M151.md)
+
+New since last run (36):
+
+- `#allow-multiple-media-notifications`
+- `#android-bricks-native-page`
+- `#android-context-menu-disabled-menu-items`
+- `#android-device-signals-disclaimer`
+- `#autofill-ambient-autofill`
+- `#autofill-enable-resurrecting-payments-users`
+- `#collect-accessibility-heuristic-in-canvas-ukm`
+- `#dbd-password-removal-on-android`
+- `#declarative-performance-observer`
+- `#desktop-fling-curve-on-android`
+- `#devtools-plus-button`
+- `#enable-android-enterprise-screenshot-protection`
+- `#enable-cross-device-theme-tracker`
+- `#enable-dynamic-route-fetching`
+- `#fedcm-native-idps`
+- `#input-cursor-anchor-info-migration`
+- `#long-screenshots-no-memory-check`
+- `#make-identity-manager-source-of-accounts-part2`
+- `#mobile-promo-on-desktop-with-qr-code-wave-2`
+- `#mobile-promo-on-desktop-with-reminder-wave-2`
+- `#omnibox-fusebox-async-inflation`
+- `#partition-alloc-scheduler-loop-quarantine`
+- `#password-save-in-context-error-resolution`
+- `#prefetch-activation-beacon`
+- `#prerender-activation-beacon`
+- `#read-aloud-native`
+- `#session-encryption`
+- `#settings-in-tab`
+- `#tab-search-for-al`
+- `#test-root-store`
+- `#throttle-repeated-no-damage-frames`
+- `#tips-self-service`
+- `#use-p-link-in-help`
+- `#user-feedback-allowed-policy`
+- `#user-media-element-legacy`
+- `#wide-screen-feed-for-foldables`
